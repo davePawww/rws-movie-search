@@ -1,6 +1,6 @@
+import { tmdbImgPath } from '@/api/movies.api';
 import { Item, ItemContent, ItemDescription, ItemHeader, ItemTitle } from '@/components/ui/item';
-import { tmdbImgPath } from '@/features/movies/movies.api';
-import type { Movie } from '@/features/movies/movies.types';
+import type { Movie } from '@/types/movies.types';
 
 type MovieItemProps = {
   movie: Movie;

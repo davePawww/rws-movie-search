@@ -6,6 +6,8 @@ import Container from '@/components/layout/container';
 import Content from '@/components/layout/content';
 import Footer from '@/components/layout/footer';
 import Header from '@/components/layout/header';
+import SearchBar from '@/components/search-bar';
+import { Separator } from '@/components/ui/separator';
 import { useThemeSync } from '@/hooks/use-theme-sync';
 import type { RouterContext } from '@/types/common.types';
 
@@ -26,12 +28,13 @@ function RootLayout() {
               <Link to="/" className="[&.active]:font-bold">
                 Home
               </Link>
-              <Link to="/about" className="[&.active]:font-bold">
+              <Link to="/favorites" className="[&.active]:font-bold">
                 Favorites
               </Link>
             </div>
           </div>
-          <hr />
+          <Separator />
+          <SearchBar />
           <Outlet />
         </Content>
         <Footer />
