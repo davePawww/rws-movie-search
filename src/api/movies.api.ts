@@ -20,7 +20,7 @@ export const fetchTrending = async (): Promise<PaginatedResponse<Movie>> => {
 };
 
 export const searchMovies = async (query: string): Promise<PaginatedResponse<Movie>> => {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=true&language=en-US`;
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=true&language=en-US`;
   const response = await fetch(url, options);
 
   if (!response.ok) throw new Error('Failed to fetch movies');
