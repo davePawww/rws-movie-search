@@ -23,8 +23,8 @@ function RootLayout() {
       <Container>
         <Header />
         <Content>
-          <div>
-            <div className="flex gap-2 p-2">
+          <div className="bg-background sticky top-0 z-10 px-4 py-2">
+            <div className="flex gap-2 pb-2">
               <Link to="/" className="[&.active]:font-bold">
                 Home
               </Link>
@@ -32,10 +32,12 @@ function RootLayout() {
                 Favorites
               </Link>
             </div>
+            <Separator />
+            <SearchBar />
           </div>
-          <Separator />
-          <SearchBar />
-          <Outlet />
+          <div className="px-4">
+            <Outlet />
+          </div>
         </Content>
         <Footer />
       </Container>
