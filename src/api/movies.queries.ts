@@ -2,14 +2,15 @@ import { queryOptions } from '@tanstack/react-query';
 
 import { fetchTrending, searchMovies } from '@/api/movies.api';
 
-export const trendingQueryOptions = queryOptions({
-  queryKey: ['trending'],
-  queryFn: fetchTrending,
-});
-
-export const searchQueryOptions = (query: string) =>
+export const trendingQueryOptions = (page: number = 1) =>
   queryOptions({
-    queryKey: ['search', query],
-    queryFn: () => searchMovies(query),
+    queryKey: ['trending', page],
+    queryFn: () => fetchTrending(page),
+  });
+
+export const searchQueryOptions = (query: string, page: number = 1) =>
+  queryOptions({
+    queryKey: ['search', query, page],
+    queryFn: () => searchMovies(query, page),
     enabled: query.length > 0,
   });
