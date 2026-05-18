@@ -1,11 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/')({
-  // sample loader that prefetches the query data for the route
-  // loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(sQueryOptions),
-  component: RouteComponent,
-});
+import { trendingQueryOptions } from '@/features/movies/movies.queries';
+import MoviesPage from '@/pages/movies.page';
 
-function RouteComponent() {
-  return <div>Hello /!</div>;
-}
+export const Route = createFileRoute('/')({
+  loader: ({ context: { queryClient } }) => queryClient.ensureQueryData(trendingQueryOptions),
+  component: MoviesPage,
+});
