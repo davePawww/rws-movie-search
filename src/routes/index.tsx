@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import { trendingQueryOptions } from '@/features/movies/movies.queries';
+import { trendingQueryOptions } from '@/api/movies.queries';
 import MoviesPage from '@/pages/movies.page';
 
 export const Route = createFileRoute('/')({

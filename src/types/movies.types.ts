@@ -1,3 +1,8 @@
+export type MovieStore = {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+};
+
 export type Movie = {
   adult: boolean;
   backdrop_path: string;
@@ -16,9 +21,9 @@ export type Movie = {
   vote_count: number;
 };
 
-export type TrendingResponse = {
+export type PaginatedResponse<T> = {
   page: number;
-  results: Movie[];
+  results: T[];
   total_pages: number;
   total_results: number;
 };
