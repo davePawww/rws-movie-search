@@ -30,3 +30,12 @@ export const searchMovies = async (
 
   return response.json() as Promise<PaginatedResponse<Movie>>;
 };
+
+export const fetchMovieById = async (id: number): Promise<Movie> => {
+  const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+  const response = await fetch(url, options);
+
+  if (!response.ok) throw new Error('Failed to fetch the movie');
+
+  return response.json() as Promise<Movie>;
+};
