@@ -27,6 +27,8 @@ const MOCK_MOVIE: Movie = {
   genre_ids: [28, 878],
   adult: false,
   video: false,
+  genres: [],
+  runtime: 120,
 };
 const MOCK_PAGE = { page: 1, total_pages: 1, total_results: 1, results: [MOCK_MOVIE] };
 const EMPTY_PAGE = { page: 1, total_pages: 0, total_results: 0, results: [] };
