@@ -5,6 +5,11 @@ export type MovieStore = {
   setPage: (page: number) => void;
 };
 
+export type Genre = {
+  id: number;
+  name: string;
+};
+
 export type Movie = {
   adult: boolean;
   backdrop_path: string;
@@ -21,6 +26,8 @@ export type Movie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  genres: Genre[];
+  runtime: number;
 };
 
 export type PaginatedResponse<T> = {
