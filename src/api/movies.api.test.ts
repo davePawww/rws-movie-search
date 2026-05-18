@@ -14,10 +14,10 @@ describe('fetchTrending', () => {
     const fakeData = { results: [], page: 1, total_pages: 1, total_results: 0 };
     vi.mocked(fetch).mockResolvedValue(await mockResponse(fakeData));
 
-    const result = await fetchTrending();
+    const result = await fetchTrending(1);
     expect(result).toEqual(fakeData);
     expect(fetch).toHaveBeenCalledWith(
-      'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
+      'https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=1',
       expect.objectContaining({ method: 'GET' }),
     );
   });
@@ -42,10 +42,10 @@ describe('searchMovies', () => {
     const fakeData = { results: [], page: 1, total_pages: 1, total_results: 0 };
     vi.mocked(fetch).mockResolvedValue(await mockResponse(fakeData));
 
-    const result = await searchMovies('harry potter');
+    const result = await searchMovies('harry potter', 1);
     expect(result).toEqual(fakeData);
     expect(fetch).toHaveBeenCalledWith(
-      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent('harry potter')}&include_adult=true&language=en-US`,
+      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent('harry potter')}&include_adult=true&language=en-US&page=1`,
       expect.objectContaining({ method: 'GET' }),
     );
   });

@@ -1,6 +1,8 @@
 export type MovieStore = {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  page: number;
+  setPage: (page: number) => void;
 };
 
 export type Movie = {

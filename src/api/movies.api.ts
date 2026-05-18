@@ -10,8 +10,8 @@ const options = {
   },
 };
 
-export const fetchTrending = async (): Promise<PaginatedResponse<Movie>> => {
-  const url = 'https://api.themoviedb.org/3/trending/movie/day?language=en-US';
+export const fetchTrending = async (page: number = 1): Promise<PaginatedResponse<Movie>> => {
+  const url = `https://api.themoviedb.org/3/trending/movie/day?language=en-US&page=${page}`;
   const response = await fetch(url, options);
 
   if (!response.ok) throw new Error('Failed to fetch trending');
@@ -19,8 +19,11 @@ export const fetchTrending = async (): Promise<PaginatedResponse<Movie>> => {
   return response.json() as Promise<PaginatedResponse<Movie>>;
 };
 
-export const searchMovies = async (query: string): Promise<PaginatedResponse<Movie>> => {
-  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=true&language=en-US`;
+export const searchMovies = async (
+  query: string,
+  page: number = 1,
+): Promise<PaginatedResponse<Movie>> => {
+  const url = `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=true&language=en-US&page=${page}`;
   const response = await fetch(url, options);
 
   if (!response.ok) throw new Error('Failed to fetch movies');
