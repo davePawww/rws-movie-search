@@ -3,6 +3,9 @@ export type MovieStore = {
   setSearchQuery: (query: string) => void;
   page: number;
   setPage: (page: number) => void;
+  favorites: Movie[];
+  addToFavorites: (movie: Movie) => void;
+  removeFromFavorites: (id: number) => void;
 };
 
 export type Genre = {
