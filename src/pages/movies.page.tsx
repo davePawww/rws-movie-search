@@ -8,41 +8,37 @@ import { useMovieStore } from '@/store/movie.store';
 export default function MoviesPage() {
   const searchQuery = useMovieStore((s) => s.searchQuery);
   const page = useMovieStore((s) => s.page);
-  const {
-    data: trendingMovies,
-    isLoading: trendingLoading,
-    isError: trendingError,
-  } = useQuery(trendingQueryOptions(page));
-  const {
-    data: searchedMovies,
-    isLoading: searchLoading,
-    isError: searchError,
-  } = useQuery(searchQueryOptions(searchQuery, page));
-
   const isSearching = searchQuery.length > 0;
 
-  // Loading states
-  if (isSearching && searchLoading) return <p>Searching for &quot;{searchQuery}&quot;…</p>;
-  if (!isSearching && trendingLoading) return <p>Loading trending movies…</p>;
+  const trendingQuery = useQuery(trendingQueryOptions(page));
+  const searchQueryResult = useQuery(searchQueryOptions(searchQuery, page));
 
-  // Error states
-  if (isSearching && searchError) return <p>Search failed. Please try again.</p>;
-  if (!isSearching && trendingError)
-    return <p>Failed to load trending movies. Please try again.</p>;
+  const activeQuery = isSearching ? searchQueryResult : trendingQuery;
+  const { data, isLoading, isError } = activeQuery;
 
-  // Empty results
-  if (isSearching && !searchedMovies?.results.length)
-    return <p>No results found for &quot;{searchQuery}&quot;.</p>;
-  if (!isSearching && !trendingMovies?.results.length)
-    return <p>No trending movies at the moment.</p>;
+  if (isLoading)
+    return <p>{isSearching ? `Searching for "${searchQuery}"` : 'Loading trending movies.'}</p>;
+
+  if (isError)
+    return (
+      <p>
+        {isSearching
+          ? 'Search failed. Please try again.'
+          : 'Failed to load trending movies. Please try again.'}
+      </p>
+    );
+
+  if (data?.results.length === 0)
+    return (
+      <p>
+        {isSearching ? `No results found for "${searchQuery}` : 'No trending movies at the moment.'}
+      </p>
+    );
 
   return (
     <>
-      <MovieList movies={isSearching ? searchedMovies : trendingMovies} />
-      <Pagination
-        page={isSearching ? searchedMovies?.page : trendingMovies?.page}
-        totalPages={isSearching ? searchedMovies?.total_pages : trendingMovies?.total_pages}
-      />
+      <MovieList movies={data} />
+      <Pagination page={data?.page} totalPages={data?.total_pages} />
     </>
   );
 }
